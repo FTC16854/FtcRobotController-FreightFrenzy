@@ -81,6 +81,8 @@ public class ParentOpModeExample extends LinearOpMode {
     Toggle toggleClaw = new Toggle();
     Toggle toggleLift = new Toggle();
     Toggle toggleDirection = new Toggle();
+    //Toggle toggleExample2 = new Toggle(buttonToToggle); //button as constructor parameter instead of method parameter
+                                                        // (Need constructor in Toggle class to assign boolean values)
 
     //Other Global Variables
     //put global variables here...
