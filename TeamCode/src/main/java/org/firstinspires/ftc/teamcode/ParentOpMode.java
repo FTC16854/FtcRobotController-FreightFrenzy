@@ -163,7 +163,7 @@ public class ParentOpMode extends LinearOpMode {
         return gamepad1.right_stick_x;
     }
 
-    public double right_stick_y(){
+    public double right_sticky_y(){
         return -gamepad1.right_stick_y;
     }
 
@@ -208,6 +208,10 @@ public class ParentOpMode extends LinearOpMode {
     // autonomous programs without additional work
     public void tankdrive(double left, double right){
 
+        rightFront.setPower(right);
+        rightBack.setPower(right);
+        leftFront.setPower(left);
+        leftBack.setPower(right);
     }
 
     public void stopDrive(){
