@@ -53,7 +53,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@TeleOp(name="Parent Opmode", group="Linear Opmode")
+@TeleOp(name="Template", group="Linear Opmode")
 @Disabled
 public class ChildOpModeTemplate extends ParentOpMode{
 

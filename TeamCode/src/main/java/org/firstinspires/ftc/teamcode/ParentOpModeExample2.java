@@ -1,3 +1,4 @@
+
 /* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -40,7 +41,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.openftc.revextensions2.ExpansionHubEx;
+//import org.openftc.revextensions2.ExpansionHubEx;
 
 
 /**
@@ -56,7 +57,7 @@ import org.openftc.revextensions2.ExpansionHubEx;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Parent Opmode", group="Linear Opmode")
+@TeleOp(name="Parent Opmode Example2", group="Linear Opmode")
 @Disabled
 public class ParentOpModeExample2 extends LinearOpMode {
 
@@ -75,11 +76,11 @@ public class ParentOpModeExample2 extends LinearOpMode {
 
 
     //Setup Toggles
-    Toggle toggleClaw = new Toggle();
+  /*  Toggle toggleClaw = new Toggle();
     Toggle toggleLift = new Toggle();
     Toggle toggleDirection = new Toggle();
     //Toggle toggleExample2 = new Toggle(buttonToToggle); //button as constructor parameter instead of method parameter
-                                                        // (Need constructor in Toggle class to assign boolean values)
+ */                                                       // (Need constructor in Toggle class to assign boolean values)
 
     //Other Global Variables
     //put global variables here...
@@ -99,7 +100,7 @@ public class ParentOpModeExample2 extends LinearOpMode {
         shooterFlipper = hardwareMap.get(Servo.class,"shooterFlipper_servo");
         //intakeLatch = hardwareMap.get(Servo.class,"intakeLatch_servo");
         wobbleClaw = hardwareMap.get(Servo.class, "wobble_claw");
-        wobbleLift = hardwareMap.get(ServoImplEx.class, "wobble_lift");
+   //     wobbleLift = hardwareMap.get(ServoImplEx.class, "wobble_lift");
         conveyor = hardwareMap.get(CRServo.class, "conveyor_servo");
 
 
@@ -118,11 +119,11 @@ public class ParentOpModeExample2 extends LinearOpMode {
         shooterFlipper.setDirection(Servo.Direction.REVERSE);
         //intakeLatch.setDirection(Servo.Direction.FORWARD);
         wobbleClaw.setDirection(Servo.Direction.FORWARD);
-        wobbleLift.setDirection(Servo.Direction.FORWARD);
+     //   wobbleLift.setDirection(Servo.Direction.FORWARD);
         conveyor.setDirection(CRServo.Direction.FORWARD);
 
         //Set range for special Servos
-        wobbleLift.scaleRange(0.15,.85); //Savox PWM range is between 0.8 and 2.2 ms. REV Hub puts out 0.5-2.5ms.
+        // wobbleLift.scaleRange(0.15,.85); //Savox PWM range is between 0.8 and 2.2 ms. REV Hub puts out 0.5-2.5ms.
 
         //Set brake or coast modes. Drive motors should match switch on SPARK Mini attached to LF Drive Motor
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //BRAKE or FLOAT (Coast)
@@ -269,10 +270,11 @@ public class ParentOpModeExample2 extends LinearOpMode {
         rotationSpeed = right_sticky_x()*.75;
         robotSpeed = Math.hypot(left_sticky_x(), left_sticky_y());
         movementAngle = Math.atan2(left_sticky_y(), left_sticky_x()) + Math.toRadians(-90); // with 90 degree offset
-
+/*
         if(toggleDirection.toggleButtonDebounced(switchSidesButton())){  //Flip driving direction
             movementAngle = movementAngle + Math.toRadians(180);
         }
+ */
         double leftFrontSpeed = (robotSpeed * Math.cos(movementAngle + (Math.PI / 4))) + rotationSpeed;
         double rightFrontSpeed = (robotSpeed * Math.sin(movementAngle + (Math.PI / 4))) - rotationSpeed;
         double leftBackSpeed = (robotSpeed*Math.sin(movementAngle + (Math.PI/4))) + rotationSpeed;
@@ -329,7 +331,7 @@ public class ParentOpModeExample2 extends LinearOpMode {
 
 
     //More Methods (Functions)
-
+/*
     public void claw() {
 
         boolean clawClose = toggleClaw.toggleButtonDebounced(clawButton());
@@ -361,6 +363,7 @@ public class ParentOpModeExample2 extends LinearOpMode {
         }
     }
 
+*/
 
     public void intake(){
         double intakeServoSpeed = 1;
@@ -496,7 +499,7 @@ public class ParentOpModeExample2 extends LinearOpMode {
 
     }
 */
-
+/*
     public void getCurrentTelemetry(){
         try{
             double totalCurrent = expansionHub.getTotalModuleCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS);
@@ -519,7 +522,7 @@ public class ParentOpModeExample2 extends LinearOpMode {
             telemetry.addData("Current Monitoring:", currentERROR);
         }
     }
-
+*/
 
 
 }

@@ -56,7 +56,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@TeleOp(name="Parent Opmode", group="Linear Opmode")
+@TeleOp(name="Tankdrive", group="Linear Opmode")
 //@Disabled
 public class ChildOpModeTank extends ParentOpMode{
 
