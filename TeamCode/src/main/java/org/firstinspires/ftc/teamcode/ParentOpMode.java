@@ -70,7 +70,10 @@ public class ParentOpMode extends LinearOpMode {
     private DcMotor rightBack = null;
     private DcMotor leftFront = null;
     private DcMotor leftBack = null;
-    //private CRServo intakeServo = null;
+
+    private CRServo duckWheel = null;
+
+
     //private Servo shooterFlipper = null;
 
     //Other Global Variables
@@ -85,6 +88,8 @@ public class ParentOpMode extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rb_drive");
         leftBack = hardwareMap.get(DcMotor.class, "lb_drive");
         leftFront = hardwareMap.get(DcMotor.class, "lf_drive");
+
+        duckWheel = hardwareMap.get(CRServo.class,"duck_whel");
         //intakeServo = hardwareMap.get(CRServo.class, "intake_servo");
         //shooterFlipper = hardwareMap.get(Servo.class,"shooterFlipper_servo");
 
@@ -97,6 +102,7 @@ public class ParentOpMode extends LinearOpMode {
         leftBack.setDirection(DcMotor.Direction.FORWARD);
         leftFront.setDirection(DcMotor.Direction.FORWARD);
 
+        duckWheel.setDirection(CRServo.Direction.REVERSE);
         //intakeServo.setDirection(CRServo.Direction.REVERSE);
         //shooterFlipper.setDirection(Servo.Direction.REVERSE);
 
@@ -172,7 +178,9 @@ public class ParentOpMode extends LinearOpMode {
     public boolean emergencyButtons (){
         return  gamepad1.x&&gamepad1.y;
     }
-
+    public boolean duckWheelButton(){
+        return gamepad1.left_bumper;
+    }
 
    /* public boolean shootButton(){
         if((gamepad1.right_trigger>.25)||(gamepad2.right_trigger>.25)){
@@ -224,6 +232,15 @@ public class ParentOpMode extends LinearOpMode {
 
     /*****************************/
     //More Methods (Functions)
+
+    public void duckWheelSpin(){
+        if (duckWheelButton()) {
+            duckWheel.setPower(1);
+        }
+        else {
+            duckWheel.setPower(0);
+        }
+    }
 
 
     /*****************************/

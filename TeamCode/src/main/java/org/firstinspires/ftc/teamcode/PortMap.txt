@@ -1,8 +1,8 @@
 Motor Ports                    Configuration Names
-    0   LF Motor               lf_drive
-    1
-    2
-    3
+    0   RF Motor                rf_drive
+    1   RB Motor                rb_drive
+    2   LF Motor                lf_drive
+    3   LB Motor                lb_drive
 
 Servo Ports
     0
