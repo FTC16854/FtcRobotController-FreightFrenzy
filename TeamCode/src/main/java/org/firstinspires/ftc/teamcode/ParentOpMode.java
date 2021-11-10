@@ -70,8 +70,14 @@ public class ParentOpMode extends LinearOpMode {
     private DcMotor rightBack = null;
     private DcMotor leftFront = null;
     private DcMotor leftBack = null;
+    // we named the motors
 
     private CRServo duckWheel = null;
+
+    private CRServo intake = null;
+
+    private Servo liftTheIII = null;
+
 
 
     //private Servo shooterFlipper = null;
@@ -89,7 +95,12 @@ public class ParentOpMode extends LinearOpMode {
         leftBack = hardwareMap.get(DcMotor.class, "lb_drive");
         leftFront = hardwareMap.get(DcMotor.class, "lf_drive");
 
+
         duckWheel = hardwareMap.get(CRServo.class,"duck_whel");
+
+        intake = hardwareMap.get(CRServo.class, "cool_intake");
+
+        liftTheIII = hardwareMap.get(Servo.class, "liftTheThird");
         //intakeServo = hardwareMap.get(CRServo.class, "intake_servo");
         //shooterFlipper = hardwareMap.get(Servo.class,"shooterFlipper_servo");
 
@@ -103,8 +114,13 @@ public class ParentOpMode extends LinearOpMode {
         leftFront.setDirection(DcMotor.Direction.FORWARD);
 
         duckWheel.setDirection(CRServo.Direction.REVERSE);
-        //intakeServo.setDirection(CRServo.Direction.REVERSE);
+
+        intake.setDirection(CRServo.Direction.REVERSE);
+
+        liftTheIII.setDirection(Servo.Direction.REVERSE);
         //shooterFlipper.setDirection(Servo.Direction.REVERSE);
+
+
 
         //Set range for special Servos
         //wobbleLift.scaleRange(0.15,.85); //Savox PWM range is between 0.8 and 2.2 ms. REV Hub puts out 0.5-2.5ms.
@@ -182,6 +198,15 @@ public class ParentOpMode extends LinearOpMode {
         return gamepad1.left_bumper;
     }
 
+    public boolean intakeButton(){
+        return gamepad1.b;
+    }
+
+    // public boolean liftTheButtonDown(){}
+
+    // public boolean liftTheButtonUp(){}
+
+
    /* public boolean shootButton(){
         if((gamepad1.right_trigger>.25)||(gamepad2.right_trigger>.25)){
             return true;         // Converts analog triggers into digital button presses (booleans)
@@ -202,7 +227,7 @@ public class ParentOpMode extends LinearOpMode {
             return true;
         }
         else {
-            return false;
+            return false                                    ;
         }
     }
 
@@ -242,6 +267,14 @@ public class ParentOpMode extends LinearOpMode {
         }
     }
 
+        public void intakeEatr(){
+        if (intakeButton()) {
+            intake.setPower(.999);
+        }
+        else{
+            intake.setPower(0);
+        }
+        }
 
     /*****************************/
     //Encoder Functions
