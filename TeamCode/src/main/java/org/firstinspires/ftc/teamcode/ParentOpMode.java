@@ -84,7 +84,7 @@ public class ParentOpMode extends LinearOpMode {
 
     //Other Global Variables
     //put global variables here...
-    //
+    double liftposition = .5;
 
     public void initialize(){
         // Initialize the hardware variables. Note that the strings used here as parameters
@@ -202,9 +202,13 @@ public class ParentOpMode extends LinearOpMode {
         return gamepad1.b;
     }
 
-    // public boolean liftTheButtonDown(){}
+     public boolean liftTheButtonUp(){
+        return gamepad1.dpad_up;
+     }
 
-    // public boolean liftTheButtonUp(){}
+     public boolean liftTheButtonDown(){
+        return gamepad1.dpad_down;
+     }
 
 
    /* public boolean shootButton(){
@@ -267,14 +271,37 @@ public class ParentOpMode extends LinearOpMode {
         }
     }
 
-        public void intakeEatr(){
+    public void intakeEatr(){
+        double shrek = .9420;
         if (intakeButton()) {
-            intake.setPower(.999);
+            intake.setPower(shrek);
         }
         else{
             intake.setPower(0);
         }
+    }
+
+    public void liftTheThreeUpandDown(){
+        double wat = .00420;
+        double lowerLimit = .25;
+        double highLimit = .75;
+        if (liftTheButtonUp()){
+            liftposition = liftposition + wat;
         }
+        if (liftTheButtonDown()){
+            liftposition = liftposition - wat;
+        }
+
+        if (liftposition > highLimit){
+            // set lift position to highlimit
+        }
+        //add lower limit code
+
+        liftTheIII.setPosition(liftposition);
+    }
+
+
+
 
     /*****************************/
     //Encoder Functions
@@ -297,3 +324,6 @@ public class ParentOpMode extends LinearOpMode {
         //      9192 Counts per revolution
 
 
+    // :)
+    // ye
+    // ye
