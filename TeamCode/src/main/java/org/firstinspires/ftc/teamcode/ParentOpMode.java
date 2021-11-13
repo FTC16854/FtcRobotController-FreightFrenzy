@@ -34,7 +34,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -76,7 +75,7 @@ public class ParentOpMode extends LinearOpMode {
 
     private CRServo intake = null;
 
-    private Servo liftTheIII = null;
+    private Servo lift = null;
 
 
 
@@ -100,7 +99,7 @@ public class ParentOpMode extends LinearOpMode {
 
         intake = hardwareMap.get(CRServo.class, "cool_intake");
 
-        liftTheIII = hardwareMap.get(Servo.class, "liftTheThird");
+        lift = hardwareMap.get(Servo.class, "lift");
         //intakeServo = hardwareMap.get(CRServo.class, "intake_servo");
         //shooterFlipper = hardwareMap.get(Servo.class,"shooterFlipper_servo");
 
@@ -117,7 +116,7 @@ public class ParentOpMode extends LinearOpMode {
 
         intake.setDirection(CRServo.Direction.REVERSE);
 
-        liftTheIII.setDirection(Servo.Direction.REVERSE);
+        lift.setDirection(Servo.Direction.REVERSE);
         //shooterFlipper.setDirection(Servo.Direction.REVERSE);
 
 
@@ -210,6 +209,16 @@ public class ParentOpMode extends LinearOpMode {
         return gamepad1.dpad_down;
      }
 
+    public boolean lifttheMONKEupbutton(){
+        return gamepad1.right_bumper;
+    }
+
+    public boolean lifttheMONKEdownbutton(){
+        if (gamepad1.right_trigger >= 0.5){
+            return true;}
+        // else if (gamepad1.right_trigger <0.5) {
+            else {return false;}
+    }
 
    /* public boolean shootButton(){
         if((gamepad1.right_trigger>.25)||(gamepad2.right_trigger>.25)){
@@ -248,7 +257,7 @@ public class ParentOpMode extends LinearOpMode {
         rightFront.setPower(right);
         rightBack.setPower(right);
         leftFront.setPower(left);
-        leftBack.setPower(right);
+        leftBack.setPower(left);
     }
 
     public void stopDrive(){
@@ -282,7 +291,7 @@ public class ParentOpMode extends LinearOpMode {
     }
 
     public void liftTheThreeUpandDown(){
-        double wat = .00420;
+        double wat = .000420;
         double lowerLimit = .25;
         double highLimit = .75;
         if (liftTheButtonUp()){
@@ -293,14 +302,29 @@ public class ParentOpMode extends LinearOpMode {
         }
 
         if (liftposition > highLimit){
-            // set lift position to highlimit
+            liftposition = highLimit;
         }
-        //add lower limit code
+        if (liftposition < lowerLimit){
+            liftposition = lowerLimit;
+        }
+        lift.setPosition(liftposition);
 
-        liftTheIII.setPosition(liftposition);
     }
 
+    public void lifttheMONKE() {
+        double lifttop = 1;
+        double liftbottom = 0;
+        if (lifttheMONKEupbutton()) {
+            liftposition = lifttop;
+        }
+        if (lifttheMONKEdownbutton()) {
+            lift.setPosition(liftbottom);
+            liftposition = liftbottom;
+        }
+        lift.setPosition(liftposition);
 
+
+    }
 
 
     /*****************************/

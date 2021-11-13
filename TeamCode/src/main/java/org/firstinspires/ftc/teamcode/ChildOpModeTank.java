@@ -76,6 +76,10 @@ public class ChildOpModeTank extends ParentOpMode{
         while (opModeIsActive()) {
 
 
+            liftTheThreeUpandDown();  //jog/nudge up and down
+            lifttheMONKE();           //set position to top or bottom
+            duckWheelSpin();
+            intakeEatr();
             tankdrive(left_sticky_y(),right_sticky_y());
             //include emergency stop check in all runOpMode() functions/methods
             if(emergencyStopped()){
