@@ -78,14 +78,13 @@ public class ParentOpMode extends LinearOpMode {
     private Servo lift = null;
 
 
-
     //private Servo shooterFlipper = null;
 
     //Other Global Variables
     //put global variables here...
     double liftposition = .5;
 
-    public void initialize(){
+    public void initialize() {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
@@ -95,7 +94,7 @@ public class ParentOpMode extends LinearOpMode {
         leftFront = hardwareMap.get(DcMotor.class, "lf_drive");
 
 
-        duckWheel = hardwareMap.get(CRServo.class,"duck_whel");
+        duckWheel = hardwareMap.get(CRServo.class, "duck_whel");
 
         intake = hardwareMap.get(CRServo.class, "cool_intake");
 
@@ -118,7 +117,6 @@ public class ParentOpMode extends LinearOpMode {
 
         lift.setDirection(Servo.Direction.REVERSE);
         //shooterFlipper.setDirection(Servo.Direction.REVERSE);
-
 
 
         //Set range for special Servos
@@ -160,7 +158,7 @@ public class ParentOpMode extends LinearOpMode {
 
 
             //include emergency stop check in all runOpMode() functions/methods
-            if(emergencyStopped()){
+            if (emergencyStopped()) {
                 break;
             }
 
@@ -172,52 +170,56 @@ public class ParentOpMode extends LinearOpMode {
     //Controls should be mapped here to avoid
     //CONTROLLER MAP
     //Thumbsticks
-    public double left_sticky_x(){
+    public double left_sticky_x() {
         return gamepad1.left_stick_x;
     }
 
-    public double left_sticky_y(){
+    public double left_sticky_y() {
         return -gamepad1.left_stick_y;
     }
 
-    public double right_sticky_x(){
+    public double right_sticky_x() {
         return gamepad1.right_stick_x;
     }
 
-    public double right_sticky_y(){
+    public double right_sticky_y() {
         return -gamepad1.right_stick_y;
     }
 
     //Buttons
 
-    public boolean emergencyButtons (){
-        return  gamepad1.x&&gamepad1.y;
+    public boolean emergencyButtons() {
+        return gamepad1.x && gamepad1.y;
     }
-    public boolean duckWheelButton(){
+
+    public boolean duckWheelButton() {
         return gamepad1.left_bumper;
     }
 
-    public boolean intakeButton(){
+    public boolean intakeButton() {
         return gamepad1.b;
     }
 
-     public boolean liftTheButtonUp(){
+    public boolean liftTheButtonUp() {
         return gamepad1.dpad_up;
-     }
+    }
 
-     public boolean liftTheButtonDown(){
+    public boolean liftTheButtonDown() {
         return gamepad1.dpad_down;
-     }
+    }
 
-    public boolean lifttheMONKEupbutton(){
+    public boolean lifttheMONKEupbutton() {
         return gamepad1.right_bumper;
     }
 
-    public boolean lifttheMONKEdownbutton(){
-        if (gamepad1.right_trigger >= 0.5){
-            return true;}
+    public boolean lifttheMONKEdownbutton() {
+        if (gamepad1.right_trigger >= 0.5) {
+            return true;
+        }
         // else if (gamepad1.right_trigger <0.5) {
-            else {return false;}
+        else {
+            return false;
+        }
     }
 
    /* public boolean shootButton(){
@@ -232,18 +234,16 @@ public class ParentOpMode extends LinearOpMode {
 
     /****************************/
     // Emergency Stop Function
-    public boolean emergencyStopped(){
+    public boolean emergencyStopped() {
         if (emergencyButtons()) {
             //stop all motors, servos, etc.
             stopDrive();
 
             return true;
-        }
-        else {
-            return false                                    ;
+        } else {
+            return false;
         }
     }
-
 
 
     /*****************************/
@@ -252,7 +252,7 @@ public class ParentOpMode extends LinearOpMode {
     // Assign left and right drive speed using arguments/parameters rather than hardcoding
     // thumb stick values inside function body. This will allow tank drive to be reused for
     // autonomous programs without additional work
-    public void tankdrive(double left, double right){
+    public void tankdrive(double left, double right) {
 
         rightFront.setPower(right);
         rightBack.setPower(right);
@@ -260,10 +260,25 @@ public class ParentOpMode extends LinearOpMode {
         leftBack.setPower(left);
     }
 
-    public void stopDrive(){
-        tankdrive(0,0 );
+    public void stopDrive() {
+        tankdrive(0, 0);
     }
 
+public void holonomicDrive(){
+        double wheelVelosistyFromtRight;
+        double wheelvelosityBackRight;
+        double wheelVelosityFrontLeft;
+        double wheelVelosityBackLeft;
+
+        double robotSpeed = Math.hypot(left_sticky_y(), left_sticky_x());
+
+        double robotAngle =
+
+        double speedOfRotation = right_sticky_x();
+
+        wheelVelosistyFromtRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
+
+}
 
 
 
