@@ -258,6 +258,9 @@ public class ParentOpMode extends LinearOpMode {
         rightBack.setPower(right);
         leftFront.setPower(left);
         leftBack.setPower(left);
+
+        telemetry.addData("lfspeed ",left);
+        telemetry.addData("rfspeed ",right);
     }
 
     public void stopDrive() {
@@ -272,12 +275,24 @@ public void holonomicDrive(){
 
         double robotSpeed = Math.hypot(left_sticky_y(), left_sticky_x());
 
-        double robotAngle =
+        double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x());
 
         double speedOfRotation = right_sticky_x();
 
-        wheelVelosistyFromtRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelVelosistyFromtRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelvelosityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
 
+        rightFront.setPower(wheelVelosistyFromtRight);
+        leftFront.setPower(wheelVelosityFrontLeft);
+        rightBack.setPower(wheelvelosityBackRight);
+        leftBack.setPower(wheelVelosityBackLeft);
+
+        telemetry.addData("lfspeed ",wheelVelosityFrontLeft);
+        telemetry.addData("lbspeed ",wheelVelosityBackLeft);
+        telemetry.addData("rfspeed ",wheelVelosistyFromtRight);
+        telemetry.addData("rbspeed ",wheelvelosityBackRight);
 }
 
 
@@ -289,9 +304,14 @@ public void holonomicDrive(){
     public void duckWheelSpin(){
         if (duckWheelButton()) {
             duckWheel.setPower(1);
+
+            telemetry.addData( "duckwheelspinner", "spinning");
         }
         else {
             duckWheel.setPower(0);
+
+            telemetry.addData("duckwheelspinner","stopped");
+
         }
     }
 
@@ -323,6 +343,7 @@ public void holonomicDrive(){
             liftposition = lowerLimit;
         }
         lift.setPosition(liftposition);
+        telemetry.addData("liftposition", liftposition);
 
     }
 
