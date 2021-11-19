@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -36,6 +37,12 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 
 /**
  * Original FTC opmode header block
@@ -77,8 +84,9 @@ public class ParentOpMode extends LinearOpMode {
 
     private Servo lift = null;
 
-
-    //private Servo shooterFlipper = null;
+    // gyro
+    BNO055IMU imu;
+    Orientation angles = new Orientation();
 
     //Other Global Variables
     //put global variables here...
@@ -128,6 +136,7 @@ public class ParentOpMode extends LinearOpMode {
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        gyroInitialize();
 
         //Update Driver Station Status Message
         telemetry.addData("Status:", "Initialized");
@@ -268,8 +277,8 @@ public class ParentOpMode extends LinearOpMode {
     }
 
 public void holonomicDrive(){
-        double wheelVelosistyFromtRight;
-        double wheelvelosityBackRight;
+        double wheelVelocityFrontRight;
+        double wheelVelocityBackRight;
         double wheelVelosityFrontLeft;
         double wheelVelosityBackLeft;
 
@@ -279,23 +288,55 @@ public void holonomicDrive(){
 
         double speedOfRotation = right_sticky_x();
 
-        wheelVelosistyFromtRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
         wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
-        wheelvelosityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelocityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
         wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
 
-        rightFront.setPower(wheelVelosistyFromtRight);
+        rightFront.setPower(wheelVelocityFrontRight);
         leftFront.setPower(wheelVelosityFrontLeft);
-        rightBack.setPower(wheelvelosityBackRight);
+        rightBack.setPower(wheelVelocityBackRight);
         leftBack.setPower(wheelVelosityBackLeft);
 
         telemetry.addData("lfspeed ",wheelVelosityFrontLeft);
         telemetry.addData("lbspeed ",wheelVelosityBackLeft);
-        telemetry.addData("rfspeed ",wheelVelosistyFromtRight);
-        telemetry.addData("rbspeed ",wheelvelosityBackRight);
+        telemetry.addData("rfspeed ", wheelVelocityFrontRight);
+        telemetry.addData("rbspeed ",wheelVelocityBackRight);
 }
 
+    public void fieldCentric(){
+        double wheelVelocityFrontRight;
+        double wheelVelocityBackRight;
+        double wheelVelosityFrontLeft;
+        double wheelVelosityBackLeft;
 
+        double angleOffset = getGyroAngle();
+
+        double robotSpeed = Math.hypot(left_sticky_y(), left_sticky_x());
+
+        double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x())-angleOffset;
+
+        double speedOfRotation = right_sticky_x();
+
+
+
+        wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelVelocityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
+
+        rightFront.setPower(wheelVelocityFrontRight);
+        leftFront.setPower(wheelVelosityFrontLeft);
+        rightBack.setPower(wheelVelocityBackRight);
+        leftBack.setPower(wheelVelosityBackLeft);
+
+        telemetry.addData("lfspeed ",wheelVelosityFrontLeft);
+        telemetry.addData("lbspeed ",wheelVelosityBackLeft);
+        telemetry.addData("rfspeed ", wheelVelocityFrontRight);
+        telemetry.addData("rbspeed ",wheelVelocityBackRight);
+
+        telemetry.addData("angle", angleOffset);
+    }
 
 
     /*****************************/
@@ -358,8 +399,47 @@ public void holonomicDrive(){
             liftposition = liftbottom;
         }
         lift.setPosition(liftposition);
+    }
 
 
+    /*****************************/
+    //Gyro Functions
+
+    public void gyroInitialize(){
+        // JWN Referenced https://stemrobotics.cs.pdx.edu/node/7265 for IMU
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+
+        parameters.mode                = BNO055IMU.SensorMode.IMU;  //this was the way we did it last year, my be slow and jerky
+        // parameters.mode                = BNO055IMU.SensorMode.GYRO; //This should theoretically be faster (no wasted hardware cycles to get pitch and roll) if it works. Haven’t tested yet.
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.loggingEnabled      = false;
+
+        // Retrieve and initialize the IMU. IMU to be attached to an I2C port
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu.initialize(parameters);
+
+        telemetry.addData("Mode", "calibrating...");
+        telemetry.update();
+
+        // make sure the imu gyro is calibrated before continuing.
+        while (!isStopRequested() && !imu.isGyroCalibrated())
+        {
+            sleep(50);
+            idle();
+        }
+    }
+
+    public double getGyroAngle(){
+        // Z axis is returned as 0 to +180 or 0 to -180 rolling to -179 or +179 when passing 180
+        Orientation angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double heading = angles.firstAngle;
+        return heading;
+
+    }
+
+    public void resetAngle(){
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
     }
 
 
@@ -375,15 +455,10 @@ public void holonomicDrive(){
 }
 
         //TODO
-        //  Hardware map
-        //  Controls map
-        //  Tank Drive Function
+        //  Field-Centric/Gyro Stuff
 
         //Encoder Stuff
         //  Odometry Wheels
         //      9192 Counts per revolution
 
 
-    // :)
-    // ye
-    // ye
