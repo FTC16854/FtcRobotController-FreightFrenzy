@@ -202,11 +202,15 @@ public class ParentOpMode extends LinearOpMode {
     }
 
     public boolean duckWheelButton() {
-        return gamepad1.left_bumper;
+        return gamepad1.b;
     }
 
     public boolean intakeButton() {
-        return gamepad1.b;
+        return gamepad1.left_bumper ;
+    }
+
+    public boolean intakeReverseButton() {
+        return gamepad1.right_bumper;
     }
 
     public boolean liftTheButtonUp() {
@@ -218,18 +222,29 @@ public class ParentOpMode extends LinearOpMode {
     }
 
     public boolean lifttheMONKEupbutton() {
-        return gamepad1.right_bumper;
-    }
-
-    public boolean lifttheMONKEdownbutton() {
         if (gamepad1.right_trigger >= 0.5) {
             return true;
         }
-        // else if (gamepad1.right_trigger <0.5) {
         else {
             return false;
         }
     }
+
+    public boolean lifttheMONKEdownbutton() {
+        if (gamepad1.left_trigger >= 0.5) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean restartGyroButton() {
+        return gamepad1.back;
+    }
+
+
+
 
    /* public boolean shootButton(){
         if((gamepad1.right_trigger>.25)||(gamepad2.right_trigger>.25)){
@@ -318,7 +333,9 @@ public void holonomicDrive(){
 
         double speedOfRotation = right_sticky_x();
 
-
+        if (restartGyroButton()){
+            gyroInitialize();   //Re-initialize gyro. Tried using resetAngle(), but that didn't work.
+        }
 
         wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
         wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
@@ -357,9 +374,12 @@ public void holonomicDrive(){
     }
 
     public void intakeEatr(){
-        double shrek = .9420;
+        double intakeSpeed = .9420;
         if (intakeButton()) {
-            intake.setPower(shrek);
+            intake.setPower(intakeSpeed);
+        }
+        else if  (intakeReverseButton()) {
+            intake.setPower(-intakeSpeed);
         }
         else{
             intake.setPower(0);
@@ -438,7 +458,7 @@ public void holonomicDrive(){
 
     }
 
-    public void resetAngle(){
+    public void resetAngle(){   //Need to do more research on how this function works
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
     }
 
@@ -450,6 +470,51 @@ public void holonomicDrive(){
         return rightFront.getCurrentPosition();
     }
     */
+
+
+    //autonomous
+
+    public void holonomicDriveAuto(double robotSpeed, double robotAngle, double speedOfRotation){
+        double wheelVelocityFrontRight;
+        double wheelVelocityBackRight;
+        double wheelVelosityFrontLeft;
+        double wheelVelosityBackLeft;
+
+        wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelVelocityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
+
+        rightFront.setPower(wheelVelocityFrontRight);
+        leftFront.setPower(wheelVelosityFrontLeft);
+        rightBack.setPower(wheelVelocityBackRight);
+        leftBack.setPower(wheelVelosityBackLeft);
+
+        telemetry.addData("lfspeed ",wheelVelosityFrontLeft);
+        telemetry.addData("lbspeed ",wheelVelosityBackLeft);
+        telemetry.addData("rfspeed ", wheelVelocityFrontRight);
+        telemetry.addData("rbspeed ",wheelVelocityBackRight);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
