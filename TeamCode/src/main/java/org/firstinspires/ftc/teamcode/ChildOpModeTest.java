@@ -73,12 +73,13 @@ public class ChildOpModeTest extends ParentOpMode{
         while (opModeIsActive()) {
 
 
-            holonomicDriveAuto(.8467, 0, 0);
-            sleep (1500);
+//            holonomicDriveAuto(.8467, 0, 0);
+//            sleep (1500);
+//            stopDrive();
+//            holonomicDriveAuto(.8467, .243, -1);
+//            sleep (3500);
             stopDrive();
-            holonomicDriveAuto(.8467, .243, -1);
-            sleep (3500);
-            stopDrive();
+            rotateToAngle(45);
             telemetry.update();
             break;
         }

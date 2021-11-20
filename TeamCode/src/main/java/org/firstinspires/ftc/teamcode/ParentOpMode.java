@@ -496,7 +496,32 @@ public void holonomicDrive(){
         telemetry.addData("rbspeed ",wheelVelocityBackRight);
     }
 
+    public void rotateToAngle (double targetAngle){
+        double speed = .5;
 
+        if (targetAngle > 0) {
+            //turn right
+            while (getGyroAngle()<targetAngle){
+                holonomicDriveAuto(0, 0, speed);
+
+                telemetry.addData("Target Angle: ",targetAngle);
+                telemetry.addData("Current Angle",getGyroAngle());
+                telemetry.update();
+            }
+        }
+        else {
+            //turn left
+            while (getGyroAngle()>targetAngle){
+                holonomicDriveAuto(0, 0, -speed);
+
+                telemetry.addData("Target Angle: ",targetAngle);
+                telemetry.addData("Current Angle",getGyroAngle());
+                telemetry.update();
+            }
+        }
+        stopDrive();
+
+    }
 
 
 
