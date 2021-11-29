@@ -347,10 +347,10 @@ public void holonomicDrive(){
         rightBack.setPower(wheelVelocityBackRight);
         leftBack.setPower(wheelVelosityBackLeft);
 
-        telemetry.addData("lfspeed ",wheelVelosityFrontLeft);
-        telemetry.addData("lbspeed ",wheelVelosityBackLeft);
-        telemetry.addData("rfspeed ", wheelVelocityFrontRight);
-        telemetry.addData("rbspeed ",wheelVelocityBackRight);
+        telemetry.addData("LF speed ",wheelVelosityFrontLeft);
+        telemetry.addData("RF speed ", wheelVelocityFrontRight);
+        telemetry.addData("LB speed ",wheelVelosityBackLeft);
+        telemetry.addData("RB speed ",wheelVelocityBackRight);
 
         telemetry.addData("angle", angleOffset);
     }
@@ -466,13 +466,14 @@ public void holonomicDrive(){
     /*****************************/
     //Encoder Functions
    /*
+   // Example from 2020 season:
     public double getLeftVerticalEncoder(){
         return rightFront.getCurrentPosition();
     }
     */
 
-
-    //autonomous
+    /*****************************/
+    //Autonomous Functions
 
     public void holonomicDriveAuto(double robotSpeed, double robotAngle, double speedOfRotation){
         double wheelVelocityFrontRight;
@@ -490,10 +491,10 @@ public void holonomicDrive(){
         rightBack.setPower(wheelVelocityBackRight);
         leftBack.setPower(wheelVelosityBackLeft);
 
-        telemetry.addData("lfspeed ",wheelVelosityFrontLeft);
-        telemetry.addData("lbspeed ",wheelVelosityBackLeft);
-        telemetry.addData("rfspeed ", wheelVelocityFrontRight);
-        telemetry.addData("rbspeed ",wheelVelocityBackRight);
+        telemetry.addData("LF speed ",wheelVelosityFrontLeft);
+        telemetry.addData("RF speed ", wheelVelocityFrontRight);
+        telemetry.addData("LB speed ",wheelVelosityBackLeft);
+        telemetry.addData("RB speed ",wheelVelocityBackRight);
     }
 
     public void rotateToAngle (double targetAngle){
