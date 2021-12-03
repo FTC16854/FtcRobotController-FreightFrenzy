@@ -53,9 +53,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@Autonomous(name="TestDrive", group="Linear Opmode")
+@Autonomous(name="AutoTestDrive", group="Linear Opmode")
 //@Disabled
-public class ChildOpModeTest extends ParentOpMode{
+public class ChildOpModeAutoTest extends ParentOpMode{
 
 
 
@@ -73,8 +73,8 @@ public class ChildOpModeTest extends ParentOpMode{
         while (opModeIsActive()) {
 
 
-//            holonomicDriveAuto(.8467, 0, 0);
-//            sleep (1500);
+            holonomicDriveAuto(.8467, 0, 0);
+            sleep (1500);
 //            stopDrive();
 //            holonomicDriveAuto(.8467, .243, -1);
 //            sleep (3500);

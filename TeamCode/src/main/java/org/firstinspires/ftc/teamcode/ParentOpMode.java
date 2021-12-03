@@ -119,7 +119,7 @@ public class ParentOpMode extends LinearOpMode {
         leftBack.setDirection(DcMotor.Direction.FORWARD);
         leftFront.setDirection(DcMotor.Direction.FORWARD);
 
-        duckWheel.setDirection(CRServo.Direction.REVERSE);
+        duckWheel.setDirection(CRServo.Direction.FORWARD);
 
         intake.setDirection(CRServo.Direction.REVERSE);
 
@@ -296,16 +296,17 @@ public void holonomicDrive(){
         double wheelVelocityBackRight;
         double wheelVelosityFrontLeft;
         double wheelVelosityBackLeft;
+        double angleOffset  = 90;
 
         double robotSpeed = Math.hypot(left_sticky_y(), left_sticky_x());
 
-        double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x());
+        double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x())+Math.toRadians(angleOffset);
 
-        double speedOfRotation = right_sticky_x();
+        double speedOfRotation = -right_sticky_x();
 
         wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
-        wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
-        wheelVelocityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityFrontLeft = robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelVelocityBackRight = robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
         wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
 
         rightFront.setPower(wheelVelocityFrontRight);
@@ -325,21 +326,21 @@ public void holonomicDrive(){
         double wheelVelosityFrontLeft;
         double wheelVelosityBackLeft;
 
-        double angleOffset = getGyroAngle();
+        double angleOffset = getGyroAngle() - 90;
 
         double robotSpeed = Math.hypot(left_sticky_y(), left_sticky_x());
 
-        double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x())-angleOffset;
+        double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x())-Math.toRadians(angleOffset);
 
-        double speedOfRotation = right_sticky_x();
+        double speedOfRotation = -right_sticky_x();
 
         if (restartGyroButton()){
             gyroInitialize();   //Re-initialize gyro. Tried using resetAngle(), but that didn't work.
         }
 
         wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
-        wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
-        wheelVelocityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityFrontLeft = robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelVelocityBackRight = robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
         wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
 
         rightFront.setPower(wheelVelocityFrontRight);
@@ -481,9 +482,11 @@ public void holonomicDrive(){
         double wheelVelosityFrontLeft;
         double wheelVelosityBackLeft;
 
+        robotAngle = robotAngle + Math.toRadians(0);
+
         wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
-        wheelVelosityFrontLeft = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
-        wheelVelocityBackRight = -robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityFrontLeft = robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelVelocityBackRight = robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
         wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
 
         rightFront.setPower(wheelVelocityFrontRight);
@@ -498,7 +501,7 @@ public void holonomicDrive(){
     }
 
     public void rotateToAngle (double targetAngle){
-        double speed = .5;
+        double speed = .4;
 
         if (targetAngle > 0) {
             //turn right
@@ -524,32 +527,18 @@ public void holonomicDrive(){
 
     }
 
+    public void autoRotisserie(){
+        duckWheel.setPower(1);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void autoRotisserieStop(){
+        duckWheel.setPower(0);
+    }
 
 
 
 
 }
 
-        //TODO
-        //  Field-Centric/Gyro Stuff
-
-        //Encoder Stuff
-        //  Odometry Wheels
-        //      9192 Counts per revolution
 
 

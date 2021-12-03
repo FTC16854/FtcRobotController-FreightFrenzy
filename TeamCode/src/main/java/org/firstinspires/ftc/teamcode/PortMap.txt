@@ -5,7 +5,7 @@ Motor Ports                    Configuration Names
     3   LB Motor                lb_drive
 
 Servo Ports
-    0   duckWheel               duck_whel
+    0   duckWheel               duck_wheel
     1   intake                  cool_intake
     2   lift                       lift
     3
