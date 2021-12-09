@@ -205,6 +205,8 @@ public class ParentOpMode extends LinearOpMode {
         return gamepad1.b;
     }
 
+    public boolean reverseDuckWheelButton(){return gamepad1.a;}
+
     public boolean intakeButton() {
         return gamepad1.left_bumper ;
     }
@@ -362,15 +364,21 @@ public void holonomicDrive(){
 
     public void duckWheelSpin(){
         if (duckWheelButton()) {
+
             duckWheel.setPower(1);
 
             telemetry.addData( "duckwheelspinner", "spinning");
         }
+        else {if (reverseDuckWheelButton()){
+
+            duckWheel.setPower(-1);
+            telemetry.addData( "duckwheelspinner", "reverseSpin");
+        }
+
         else {
             duckWheel.setPower(0);
-
             telemetry.addData("duckwheelspinner","stopped");
-
+        }
         }
     }
 
