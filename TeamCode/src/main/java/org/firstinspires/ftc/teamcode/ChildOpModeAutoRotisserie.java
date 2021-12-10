@@ -55,7 +55,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name="RotisserieBlue", group="Linear Opmode")
 //@Disabled
 public class ChildOpModeAutoRotisserie extends ParentOpMode{
-
+// hackerman was here
 
 
     @Override

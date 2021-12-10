@@ -202,13 +202,14 @@ public class ParentOpMode extends LinearOpMode {
     }
 
     public boolean duckWheelButton() {
-        return gamepad1.b;
+        return gamepad1.x;
     }
 
-    public boolean reverseDuckWheelButton(){return gamepad1.a;}
+    public boolean reverseDuckWheelButton(){
+        return gamepad1.b; }
 
     public boolean intakeButton() {
-        return gamepad1.left_bumper ;
+        return gamepad1.left_bumper;
     }
 
     public boolean intakeReverseButton() {
@@ -543,7 +544,15 @@ public void holonomicDrive(){
         duckWheel.setPower(0);
     }
 
-
+    public void driveDistanceMove(double travelInchesDISTANCE,double angletoDRIV){
+        double theSPEED = .4;
+        double theSPEEDinchePerSecond = 17.9; //full chare
+        double theSPEEDinchesLow = 16.32;     //low charge (obibusly)
+        double SECONDdrivenumber = travelInchesDISTANCE/theSPEEDinchePerSecond;
+        holonomicDriveAuto(theSPEED,angletoDRIV,0);
+        sleep((long)SECONDdrivenumber*1000);
+        stopDrive();
+    }
 
 
 }

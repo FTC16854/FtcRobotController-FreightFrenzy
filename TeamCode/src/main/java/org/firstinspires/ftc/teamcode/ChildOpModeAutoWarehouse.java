@@ -71,8 +71,9 @@ public class ChildOpModeAutoWarehouse extends ParentOpMode{
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            holonomicDriveAuto(0.4,270,0);
-            sleep(5000);
+           // holonomicDriveAuto(0.4,270,0);
+          //  sleep(5000);
+            driveDistanceMove(48,270);
             stopDrive();
             telemetry.update();
             break;
