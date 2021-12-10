@@ -546,9 +546,11 @@ public void holonomicDrive(){
 
     public void driveDistanceMove(double travelInchesDISTANCE,double angletoDRIV){
         double theSPEED = .4;
-        double theSPEEDinchePerSecond = 17.9; //full chare
-        double theSPEEDinchesLow = 16.32;     //low charge (obibusly)
+        double theSPEEDinchePerSecond = 18; //full chare
+        double theSPEEDinchesLow = 16.6;     //low charge (obibusly)
+
         double SECONDdrivenumber = travelInchesDISTANCE/theSPEEDinchePerSecond;
+
         holonomicDriveAuto(theSPEED,angletoDRIV,0);
         sleep((long)SECONDdrivenumber*1000);
         stopDrive();
