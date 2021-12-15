@@ -83,6 +83,7 @@ public class ParentOpMode extends LinearOpMode {
     private CRServo intake = null;
 
     private Servo lift = null;
+    private Servo liftTheSecond = null;
 
     // gyro
     BNO055IMU imu;
@@ -107,6 +108,7 @@ public class ParentOpMode extends LinearOpMode {
         intake = hardwareMap.get(CRServo.class, "cool_intake");
 
         lift = hardwareMap.get(Servo.class, "lift");
+        liftTheSecond = hardwareMap.get(Servo.class, "lift2");
         //intakeServo = hardwareMap.get(CRServo.class, "intake_servo");
         //shooterFlipper = hardwareMap.get(Servo.class,"shooterFlipper_servo");
 
@@ -124,7 +126,9 @@ public class ParentOpMode extends LinearOpMode {
         intake.setDirection(CRServo.Direction.REVERSE);
 
         lift.setDirection(Servo.Direction.REVERSE);
+        liftTheSecond .setDirection(Servo.Direction.FORWARD);
         //shooterFlipper.setDirection(Servo.Direction.REVERSE);
+        //monke man was here
 
 
         //Set range for special Servos
@@ -413,9 +417,11 @@ public void holonomicDrive(){
         if (liftposition < lowerLimit){
             liftposition = lowerLimit;
         }
-        lift.setPosition(liftposition);
-        telemetry.addData("liftposition", liftposition);
 
+        lift.setPosition(liftposition);
+        liftTheSecond.setPosition(liftposition);
+
+        telemetry.addData("liftposition", liftposition);
     }
 
     public void lifttheMONKE() {
@@ -429,6 +435,7 @@ public void holonomicDrive(){
             liftposition = liftbottom;
         }
         lift.setPosition(liftposition);
+        liftTheSecond.setPosition(liftposition);
     }
 
 
@@ -551,8 +558,8 @@ public void holonomicDrive(){
 
         double SECONDdrivenumber = travelInchesDISTANCE/theSPEEDinchePerSecond;
 
-        holonomicDriveAuto(theSPEED,angletoDRIV,0);
-        sleep((long)SECONDdrivenumber*1000);
+         holonomicDriveAuto(theSPEED,angletoDRIV,0);
+        sleep((long)(SECONDdrivenumber*1000));
         stopDrive();
     }
 
