@@ -52,11 +52,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@Autonomous(name="Warehouse", group="Linear Opmode")
+@Autonomous(name="DuckRotisserieBlue", group="Linear Opmode")
 //@Disabled
-public class duckRotisserieAuto extends ParentOpMode{
+public class duckRotisserieAutoBlue extends ParentOpMode{
 
-
+//'
 
     @Override
     public void runOpMode() {
@@ -71,9 +71,13 @@ public class duckRotisserieAuto extends ParentOpMode{
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            driveDistanceMove(60,90);
-
-
+            driveDistanceMove(60,180);
+            autoRotisserie('B');
+            sleep(4000);
+            autoRotisserieStop();
+            stopDrive();
+            driveDistanceMove(24,270);
+            driveDistanceMove(10.1,180);
             stopDrive();
             telemetry.update();
             break;

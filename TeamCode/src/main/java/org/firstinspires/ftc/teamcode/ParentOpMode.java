@@ -92,6 +92,8 @@ public class ParentOpMode extends LinearOpMode {
     //Other Global Variables
     //put global variables here...
     double liftposition = .5;
+    double liftMax = 1;
+    double liftMin = 0;
 
     public void initialize() {
         // Initialize the hardware variables. Note that the strings used here as parameters
@@ -402,8 +404,8 @@ public void holonomicDrive(){
 
     public void liftTheThreeUpandDown(){
         double wat = .000420;
-        double lowerLimit = .25;
-        double highLimit = .75;
+        double lowerLimit = liftMin;
+        double highLimit = liftMax;
         if (liftTheButtonUp()){
             liftposition = liftposition + wat;
         }
@@ -425,8 +427,8 @@ public void holonomicDrive(){
     }
 
     public void lifttheMONKE() {
-        double lifttop = 1;
-        double liftbottom = 0;
+        double lifttop = liftMax;
+        double liftbottom = liftMin;
         if (lifttheMONKEupbutton()) {
             liftposition = lifttop;
         }
@@ -498,6 +500,7 @@ public void holonomicDrive(){
         double wheelVelosityFrontLeft;
         double wheelVelosityBackLeft;
 
+        robotAngle = Math.toRadians(robotAngle);
         robotAngle = robotAngle + Math.toRadians(0);
 
         wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
@@ -543,8 +546,14 @@ public void holonomicDrive(){
 
     }
 
-    public void autoRotisserie(){
-        duckWheel.setPower(1);
+    public void autoRotisserie(char RB){
+        if (RB == 'R'){
+            duckWheel.setPower(-1);
+
+        }
+        if (RB == 'B'){
+            duckWheel.setPower(1);
+        }
     }
 
     public void autoRotisserieStop(){
@@ -566,5 +575,15 @@ public void holonomicDrive(){
 
 }
 
-
+// dog
+// dog
+// dog
+// dog
+// dog
+// dog
+// dog
+// dog
+// dog
+// dog
+// dog
 

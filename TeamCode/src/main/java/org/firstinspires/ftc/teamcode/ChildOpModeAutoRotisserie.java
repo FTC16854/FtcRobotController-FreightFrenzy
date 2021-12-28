@@ -74,7 +74,7 @@ public class ChildOpModeAutoRotisserie extends ParentOpMode{
             holonomicDriveAuto(0.4,90,0);
             sleep(2000);
             stopDrive();
-            autoRotisserie();
+            autoRotisserie('b');
             sleep(8000);
             autoRotisserieStop();
             telemetry.update();
