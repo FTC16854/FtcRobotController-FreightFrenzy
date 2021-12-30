@@ -11,6 +11,4 @@ public class HeadingHolder {
         return OffsetofTheHeading;
     }
 
-    //TODO:
-    // Create getter method/function
 }

@@ -564,7 +564,8 @@ public void holonomicDrive(){
         double theSPEED = .4;
         double theSPEEDinchePerSecond = 18; //full charge
         double theSPEEDinchesLow = 16.6;     //low charge (obviously)
-        travelInchesDISTANCE = travelInchesDISTANCE +  6;       // Additional distance to travel to account for time taken to start to move
+        travelInchesDISTANCE = travelInchesDISTANCE +  8;       // Additional distance to travel to account for time taken to start to move
+                                                                // does not work well fo short distances!
 
         double SECONDdrivenumber = travelInchesDISTANCE/theSPEEDinchePerSecond;
 
@@ -576,15 +577,4 @@ public void holonomicDrive(){
 
 }
 
-// dog
-// dog
-// dog
-// dog
-// dog
-// dog
-// dog
-// dog
-// dog
-// dog
-// dog
 

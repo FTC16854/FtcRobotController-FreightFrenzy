@@ -1,0 +1,13 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TO DO:
+
+1.  Set lift positions
+2.  Deal with drive distance issues - either adjust timing/distance code or utilize range sensor
+3.  Control sensitivity
+    a.  Rotation Sensitivity - Done - Max set to 0.75
+    b.  Drive Speed - Add curves?
+4.  Freight intake feedback
+    a. Detect freight in intake - Sensor (Color?)
+    b. Turn on Light if freight is in intake - Digital Outputs
