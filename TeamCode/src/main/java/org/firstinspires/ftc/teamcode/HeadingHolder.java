@@ -1,13 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
 public class HeadingHolder {
-    private double OffsetofTheHeading = 0;
+    private static double OffsetofTheHeading = 0;
 
-    public void SetOffsetOfTheHeading( double InputHeading){
-        OffsetofTheHeading = InputHeading;
+    public static void SetOffsetOfTheHeading( double InputHeading){
+        OffsetofTheHeading = InputHeading - 90;
     }
 
-
+    public static double getOffsetOfTheHeading(){
+        return OffsetofTheHeading;
+    }
 
     //TODO:
     // Create getter method/function

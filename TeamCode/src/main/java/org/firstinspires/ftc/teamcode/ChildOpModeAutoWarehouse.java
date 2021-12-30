@@ -75,6 +75,7 @@ public class ChildOpModeAutoWarehouse extends ParentOpMode{
           //  sleep(5000);
             driveDistanceMove(48,0);
             stopDrive();
+            HeadingHolder.SetOffsetOfTheHeading(getGyroAngle());
             telemetry.update();
             break;
         }
@@ -86,4 +87,5 @@ public class ChildOpModeAutoWarehouse extends ParentOpMode{
         //  Odometry Wheels
         //      9192 Counts per revolution
 
+// seret formula
 

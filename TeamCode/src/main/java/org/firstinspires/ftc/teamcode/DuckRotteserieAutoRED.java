@@ -79,6 +79,7 @@ public class DuckRotteserieAutoRED extends ParentOpMode{
             driveDistanceMove(24.01,90);
             driveDistanceMove(10.1,180)  ;
             stopDrive();
+            HeadingHolder.SetOffsetOfTheHeading(getGyroAngle());
             telemetry.update();
             break;
         }

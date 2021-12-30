@@ -78,6 +78,7 @@ public class DuckRotisserieAutoBlueWarehouse extends ParentOpMode{
             stopDrive();
             driveDistanceMove(95.3,0);
             stopDrive();
+            HeadingHolder.SetOffsetOfTheHeading(getGyroAngle());
             telemetry.update();
             break;
         }

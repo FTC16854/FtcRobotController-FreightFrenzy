@@ -335,13 +335,13 @@ public void holonomicDrive(){
         double wheelVelosityFrontLeft;
         double wheelVelosityBackLeft;
 
-        double angleOffset = getGyroAngle() - 90;
+        double angleOffset = getGyroAngle() - 90 + HeadingHolder.getOffsetOfTheHeading();
 
         double robotSpeed = Math.hypot(left_sticky_y(), left_sticky_x());
 
         double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x())-Math.toRadians(angleOffset);
 
-        double speedOfRotation = -right_sticky_x();
+        double speedOfRotation = -right_sticky_x()*.75;
 
         if (restartGyroButton()){
             gyroInitialize();   //Re-initialize gyro. Tried using resetAngle(), but that didn't work.
@@ -562,12 +562,13 @@ public void holonomicDrive(){
 
     public void driveDistanceMove(double travelInchesDISTANCE,double angletoDRIV){
         double theSPEED = .4;
-        double theSPEEDinchePerSecond = 18; //full chare
-        double theSPEEDinchesLow = 16.6;     //low charge (obibusly)
+        double theSPEEDinchePerSecond = 18; //full charge
+        double theSPEEDinchesLow = 16.6;     //low charge (obviously)
+        travelInchesDISTANCE = travelInchesDISTANCE +  6;       // Additional distance to travel to account for time taken to start to move
 
         double SECONDdrivenumber = travelInchesDISTANCE/theSPEEDinchePerSecond;
 
-         holonomicDriveAuto(theSPEED,angletoDRIV,0);
+        holonomicDriveAuto(theSPEED,angletoDRIV,0);
         sleep((long)(SECONDdrivenumber*1000));
         stopDrive();
     }
