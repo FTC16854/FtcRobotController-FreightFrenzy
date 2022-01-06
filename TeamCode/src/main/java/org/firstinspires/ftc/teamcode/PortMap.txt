@@ -11,3 +11,8 @@ Servo Ports
     3   liftTheSecond           lift2
     4
     5
+
+I2C Ports
+    Bus 1 rangeSensorFront      sensor_range_front
+    Bus 2 rangeSensorRight      sensor_range_right
+    Bus 3 rangeSensoLeft        sensor_range_left

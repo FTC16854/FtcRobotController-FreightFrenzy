@@ -44,7 +44,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import com.qualcomm.hardware.bosch.BNO055IMU;
 
 /**
  * Original FTC opmode header block
@@ -87,8 +86,9 @@ public class ParentOpMode extends LinearOpMode {
     private Servo lift = null;
     private Servo liftTheSecond = null;
 
-    private ModernRoboticsI2cRangeSensor rangeSensorfront=null;
-
+    private ModernRoboticsI2cRangeSensor rangeSensorFront =null;
+    private ModernRoboticsI2cRangeSensor rangeSensorLeft =null;
+    ModernRoboticsI2cRangeSensor rangeSensorRight =null;
 
     // gyro
     BNO055IMU imu;
@@ -96,9 +96,10 @@ public class ParentOpMode extends LinearOpMode {
 
     //Other Global Variables
     //put global variables here...
-    double liftposition = .00000000000000;
-    double liftMax = 1;
-    double liftMin = 0;
+    double liftMax = .5;
+    double liftMin = .104;
+    double liftposition = liftMin;
+
 
     public void initialize() {
         // Initialize the hardware variables. Note that the strings used here as parameters
@@ -117,7 +118,10 @@ public class ParentOpMode extends LinearOpMode {
         lift = hardwareMap.get(Servo.class, "lift");
         liftTheSecond = hardwareMap.get(Servo.class, "lift2");
 
-        rangeSensorfront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
+        rangeSensorFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
+        rangeSensorLeft = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_left");
+        rangeSensorRight = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_right");
+
 
         //Set motor run mode (if using SPARK Mini motor controllers)
         //
@@ -486,12 +490,24 @@ public void holonomicDrive(){
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
     }
 
+
+    /*****************************/
     //range sensor functions
-    public double GetFrontDistanceCM(){
-        return rangeSensorfront.getDistance(DistanceUnit.CM);
-        
+
+    public double getFrontDistanceCM(){
+        double distanceFromFront = 2;
+        return rangeSensorFront.getDistance(DistanceUnit.CM)+distanceFromFront;
     }
 
+    public double getLeftDistanceCM(){
+        double distanceFromLeft= 2;
+        return rangeSensorLeft.getDistance(DistanceUnit.CM)+distanceFromLeft;
+    }
+
+    public double getRightDistanceCM(){
+        double distanceFromRight = 2;
+        return rangeSensorRight.getDistance(DistanceUnit.CM)+distanceFromRight;
+    }
 
     /*****************************/
     //Encoder Functions
