@@ -52,7 +52,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@Autonomous(name="DuckRotisserieBlue", group="Linear Opmode")
+@Autonomous(name="DuckRotisserieBlueRangeSensor", group="Linear Opmode")
 //@Disabled
 public class duckRotisserieAutoBlueRangeSensor extends ParentOpMode{
 
@@ -78,10 +78,12 @@ public class duckRotisserieAutoBlueRangeSensor extends ParentOpMode{
             stopDrive();
             while (getRightDistanceCM()< 70) {                                 //it move to tha right into tha box
                 holonomicDriveAuto(.1, 270, 0);
+                telemetry.update();
             }
             driveDistanceMove(10,180);                  //goes into tha wall
             while (getFrontDistanceCM()< 6.9) {                                 //back up the wall
                 holonomicDriveAuto(.1, 0, 0);
+                telemetry.update();
             }
 
             stopDrive();

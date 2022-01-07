@@ -495,18 +495,24 @@ public void holonomicDrive(){
     //range sensor functions
 
     public double getFrontDistanceCM(){
-        double distanceFromFront = 2;
-        return rangeSensorFront.getDistance(DistanceUnit.CM)+distanceFromFront;
+        double distanceFromFront = 4;
+        double frontDistance = rangeSensorFront.getDistance(DistanceUnit.CM)+distanceFromFront;
+        telemetry.addData("front",frontDistance);
+        return frontDistance;
     }
 
     public double getLeftDistanceCM(){
-        double distanceFromLeft= 2;
-        return rangeSensorLeft.getDistance(DistanceUnit.CM)+distanceFromLeft;
+        double distanceFromLeft= 6.5;
+        double leftDistance = rangeSensorLeft.getDistance(DistanceUnit.CM)+distanceFromLeft;
+        telemetry.addData("left",leftDistance);
+        return leftDistance;
     }
 
     public double getRightDistanceCM(){
-        double distanceFromRight = 2;
-        return rangeSensorRight.getDistance(DistanceUnit.CM)+distanceFromRight;
+        double distanceFromRight = 21.50;
+        double rightDistance = rangeSensorRight.getDistance(DistanceUnit.CM)+distanceFromRight;
+        telemetry.addData("right",rightDistance);
+        return rightDistance;
     }
 
     /*****************************/
