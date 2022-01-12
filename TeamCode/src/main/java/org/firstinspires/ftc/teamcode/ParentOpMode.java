@@ -99,6 +99,11 @@ public class ParentOpMode extends LinearOpMode {
     double liftMax = .5;
     double liftMin = .104;
     double liftposition = liftMin;
+    boolean liftuptotop= false;
+    boolean liftdowntobottom=false;
+
+
+
 
 
     public void initialize() {
@@ -412,14 +417,19 @@ public void holonomicDrive(){
     }
 
     public void liftTheThreeUpandDown(){
-        double wat = .000420;
+        double positionincrement = .000420;
         double lowerLimit = liftMin;
         double highLimit = liftMax;
+
         if (liftTheButtonUp()){
-            liftposition = liftposition + wat;
+            liftposition = liftposition + positionincrement;
+            liftuptotop = false;
+            liftdowntobottom = false;
         }
         if (liftTheButtonDown()){
-            liftposition = liftposition - wat;
+            liftposition = liftposition - positionincrement;
+            liftdowntobottom = false ;
+            liftuptotop = false;
         }
 
         if (liftposition > highLimit){
@@ -435,7 +445,7 @@ public void holonomicDrive(){
         telemetry.addData("liftposition", liftposition);
     }
 
-    public void lifttheMONKE() {
+    public void liftfaster() {
         double lifttop = liftMax;
         double liftbottom = liftMin;
         if (lifttheMONKEupbutton()) {
@@ -448,6 +458,37 @@ public void holonomicDrive(){
         lift.setPosition(liftposition);
         liftTheSecond.setPosition(liftposition);
     }
+    public void lifttheMONKE() {
+        double positionincrement = .000840;
+
+        if(lifttheMONKEupbutton()){
+            liftuptotop = true;
+            liftdowntobottom = false;
+        }
+
+        if(lifttheMONKEdownbutton()){
+            liftdowntobottom = true;
+            liftuptotop = false;
+        }
+
+        if (liftuptotop) {
+            liftposition = liftposition + positionincrement;
+        }
+        if (liftdowntobottom) {
+            liftposition = liftposition - positionincrement;
+        }
+        if (liftposition > liftMax) {
+            liftposition = liftMax;
+        }
+
+        if (liftposition < liftMin) {
+            liftposition = liftMin;
+        }
+
+        lift.setPosition(liftposition);
+
+    }
+
 
 
     /*****************************/

@@ -76,7 +76,7 @@ public class duckRotisserieAutoBlueRangeSensor extends ParentOpMode{
             sleep(4000);                                             //spins until stops approximatly 4 seconds later
             autoRotisserieStop();
             stopDrive();
-            while (getRightDistanceCM()< 70) {                                 //it move to tha right into tha box
+            while (getRightDistanceCM()< 70) {                                 //it move to the left into tha box
                 holonomicDriveAuto(.1, 270, 0);
                 telemetry.update();
             }
