@@ -71,7 +71,7 @@ public class duckRotisserieAutoBlue extends ParentOpMode{
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            driveDistanceMove(64,180);
+            driveDistanceMove(63,180);
             autoRotisserie('B');
             sleep(4000);
             autoRotisserieStop();
