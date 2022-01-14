@@ -405,7 +405,7 @@ public void holonomicDrive(){
 
     public void intakeEatr(){
         double intakeSpeed = .9420;
-        if (intakeButton()) {
+        if (intakeButton()&&liftposition <= liftMin) {
             intake.setPower(intakeSpeed);
         }
         else if  (intakeReverseButton()) {
@@ -414,10 +414,11 @@ public void holonomicDrive(){
         else{
             intake.setPower(0);
         }
+
     }
 
     public void liftTheThreeUpandDown(){
-        double positionincrement = .000420;
+        double positionincrement = .00420;
         double lowerLimit = liftMin;
         double highLimit = liftMax;
 
@@ -459,7 +460,7 @@ public void holonomicDrive(){
         liftTheSecond.setPosition(liftposition);
     }
     public void lifttheMONKE() {
-        double positionincrement = .000840;
+        double positionincrement = .01;      // hackerman was here
 
         if(lifttheMONKEupbutton()){
             liftuptotop = true;
@@ -475,7 +476,7 @@ public void holonomicDrive(){
             liftposition = liftposition + positionincrement;
         }
         if (liftdowntobottom) {
-            liftposition = liftposition - positionincrement;
+            liftposition = liftMin;
         }
         if (liftposition > liftMax) {
             liftposition = liftMax;

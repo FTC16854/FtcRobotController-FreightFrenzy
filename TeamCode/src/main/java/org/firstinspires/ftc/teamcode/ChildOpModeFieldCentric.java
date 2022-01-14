@@ -82,6 +82,10 @@ public class ChildOpModeFieldCentric extends ParentOpMode{
                 break;
             }
 
+//            getRightDistanceCM();
+//            getFrontDistanceCM();
+//            getLeftDistanceCM();
+
             telemetry.update();
         }
     }

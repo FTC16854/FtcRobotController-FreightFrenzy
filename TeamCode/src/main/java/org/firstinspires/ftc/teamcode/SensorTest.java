@@ -29,7 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 /**
  * Original FTC opmode header block
@@ -52,11 +52,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@Autonomous(name="DuckRotisserieBlue", group="Linear Opmode")
+@TeleOp(name="SensorTest", group="Linear Opmode")
 //@Disabled
-public class duckRotisserieAutoBlue extends ParentOpMode{
+public class SensorTest extends ParentOpMode{
 
-//'
+
 
     @Override
     public void runOpMode() {
@@ -71,27 +71,21 @@ public class duckRotisserieAutoBlue extends ParentOpMode{
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            driveDistanceMove(68,180);
-            autoRotisserie('B');
-            sleep(4000);
-            autoRotisserieStop();
-            stopDrive();
-            driveDistanceMove(30,270);
-            driveDistanceMove(10,180);
-            holonomicDriveAuto(.4,0,0.000);    // Back up from wall a little bit.
-            sleep(250);
-            stopDrive();
-            HeadingHolder.SetOffsetOfTheHeading(getGyroAngle());
+
+            if(emergencyStopped()){
+                break;
+            }
+
+            getRightDistanceCM();
+            getFrontDistanceCM();
+            getLeftDistanceCM();
+
             telemetry.update();
-            break;
+            sleep(200);
         }
     }
 
 }
 
-        //Encoder Stuff
-        //  Odometry Wheels
-        //      9192 Counts per revolution
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
+
+// // // /// // // /// /// // /// // / / // / / // // // // // / /  // // / // / // / / // / // / / //// / // / / // / // / // / // / // /  / / //

@@ -71,19 +71,21 @@ public class duckRotisserieAutoBlueRangeSensor extends ParentOpMode{
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            driveDistanceMove(68,180);              //drive to tha rotisserie
+            driveDistanceMove(65,180);              //drive to tha rotisserie
             autoRotisserie('B');                                            //spins the rotisserie blue
             sleep(4000);                                             //spins until stops approximatly 4 seconds later
             autoRotisserieStop();
             stopDrive();
             while (getRightDistanceCM()< 70) {                                 //it move to the left into tha box
-                holonomicDriveAuto(.1, 270, 0);
+                holonomicDriveAuto(.420, 270, 0);
                 telemetry.update();
+                sleep(100);
             }
             driveDistanceMove(10,180);                  //goes into tha wall
             while (getFrontDistanceCM()< 6.9) {                                 //back up the wall
-                holonomicDriveAuto(.1, 0, 0);
+                holonomicDriveAuto(.420, 0, 0);
                 telemetry.update();
+                sleep(100);
             }
 
             stopDrive();
