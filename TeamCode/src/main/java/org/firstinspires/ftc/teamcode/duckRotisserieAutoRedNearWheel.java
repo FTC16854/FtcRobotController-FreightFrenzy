@@ -52,9 +52,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@Autonomous(name="DuckRotisserieREDWarehouse", group="Linear Opmode")
+@Autonomous(name="DuckRotisserieRed NearWheel", group="Linear Opmode")
 //@Disabled
-public class DuckRotteserieAutoREDWarehouse extends ParentOpMode{
+public class duckRotisserieAutoRedNearWheel extends ParentOpMode{
 
 //'
 
@@ -71,7 +71,7 @@ public class DuckRotteserieAutoREDWarehouse extends ParentOpMode{
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            driveDistanceMove(25,180);
+            driveDistanceMove(16,180);
             holonomicDriveAuto(.4,90,0.000);    // Back up from wall a little bit.
             sleep(250);
             stopDrive();
@@ -83,10 +83,10 @@ public class DuckRotteserieAutoREDWarehouse extends ParentOpMode{
             sleep(4000);
             autoRotisserieStop();
             stopDrive();
-            driveDistanceMove(5,0);
-            driveDistanceMove(6,270);
-
-            driveDistanceMove(72.2,0);
+            driveDistanceMove(28,90);
+            driveDistanceMove(10,180);
+            holonomicDriveAuto(.4,0,0.000);    // Back up from wall a little bit.
+            sleep(250);
             stopDrive();
             HeadingHolder.SetOffsetOfTheHeading(getGyroAngle());
             telemetry.update();
@@ -97,8 +97,8 @@ public class DuckRotteserieAutoREDWarehouse extends ParentOpMode{
 }
 
         //Encoder Stuff
-        //  Odometry Wheels
+        //  Opdometry Wheels
         //      9192 Counts per revolution
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
+        // JP was barefoot in the field while measuring
+        // JP was barefoot in the field while measuring
+        // JP was barefoot in the field while measuring

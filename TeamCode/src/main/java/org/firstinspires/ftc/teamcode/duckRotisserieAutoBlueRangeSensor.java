@@ -30,6 +30,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 /**
  * Original FTC opmode header block
@@ -53,7 +54,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  **/
 
 @Autonomous(name="DuckRotisserieBlueRangeSensor", group="Linear Opmode")
-//@Disabled
+@Disabled
 public class duckRotisserieAutoBlueRangeSensor extends ParentOpMode{
 
 //'

@@ -76,7 +76,7 @@ public class duckRotisserieAutoBlue extends ParentOpMode{
             sleep(4000);
             autoRotisserieStop();
             stopDrive();
-            driveDistanceMove(35,270);
+            driveDistanceMove(35,270);              // storage unit
             driveDistanceMove(10,180);
             holonomicDriveAuto(.4,0,0.000);    // Back up from wall a little bit.
             sleep(250);
@@ -90,8 +90,8 @@ public class duckRotisserieAutoBlue extends ParentOpMode{
 }
 
         //Encoder Stuff
-        //  Odometry Wheels
+        //  Opdometry Wheels
         //      9192 Counts per revolution
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
+        // JP was barefoot in the field while measuring
+        // JP was barefoot in the field while measuring
+        // JP was barefoot in the field while measuring

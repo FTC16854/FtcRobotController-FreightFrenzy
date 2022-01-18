@@ -52,9 +52,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * override the ParentOpMode runOpMode() method.
  **/
 
-@Autonomous(name="DuckRotisserieREDWarehouse", group="Linear Opmode")
+@Autonomous(name="DuckRotisserieBlue NearWheel", group="Linear Opmode")
 //@Disabled
-public class DuckRotteserieAutoREDWarehouse extends ParentOpMode{
+public class duckRotisserieAutoBlueNearWheel extends ParentOpMode{
 
 //'
 
@@ -71,22 +71,15 @@ public class DuckRotteserieAutoREDWarehouse extends ParentOpMode{
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            driveDistanceMove(25,180);
-            holonomicDriveAuto(.4,90,0.000);    // Back up from wall a little bit.
-            sleep(250);
-            stopDrive();
-            holonomicDriveAuto(.4,180,0.000);    // Go towards the duck wheel.
-            sleep(250);
-            stopDrive();
-
-            autoRotisserie('R');
+            driveDistanceMove(39,180);
+            autoRotisserie('B');
             sleep(4000);
             autoRotisserieStop();
             stopDrive();
-            driveDistanceMove(5,0);
-            driveDistanceMove(6,270);
-
-            driveDistanceMove(72.2,0);
+            driveDistanceMove(35,270);              // storage unit
+            driveDistanceMove(10,180);
+            holonomicDriveAuto(.4,0,0.000);    // Back up from wall a little bit.
+            sleep(250);
             stopDrive();
             HeadingHolder.SetOffsetOfTheHeading(getGyroAngle());
             telemetry.update();
@@ -97,8 +90,8 @@ public class DuckRotteserieAutoREDWarehouse extends ParentOpMode{
 }
 
         //Encoder Stuff
-        //  Odometry Wheels
+        //  Opdometry Wheels
         //      9192 Counts per revolution
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
-        // JP was barefoot in the feild while messasuring
+        // JP was barefoot in the field while measuring
+        // JP was barefoot in the field while measuring
+        // JP was barefoot in the field while measuring
