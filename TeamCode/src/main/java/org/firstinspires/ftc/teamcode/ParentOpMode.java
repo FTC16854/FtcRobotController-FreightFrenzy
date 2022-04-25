@@ -225,8 +225,7 @@ public class ParentOpMode extends LinearOpMode {
         return gamepad1.x;
     }
 
-    public boolean reverseDuckWheelButton(){
-        return gamepad1.b; }
+    public boolean reverseDuckWheelButton(){ return gamepad1.b; }
 
     public boolean intakeButton() {
         return gamepad1.left_bumper;
@@ -539,6 +538,11 @@ public void holonomicDrive(){
     public double getFrontDistanceCM(){
         double distanceFromFront = 4;
         double frontDistance = rangeSensorFront.getDistance(DistanceUnit.CM)+distanceFromFront;
+
+        while(frontDistance>1000){
+            frontDistance = rangeSensorFront.getDistance(DistanceUnit.CM)+distanceFromFront;
+        }
+
         telemetry.addData("front",frontDistance);
         return frontDistance;
     }
@@ -546,6 +550,11 @@ public void holonomicDrive(){
     public double getLeftDistanceCM(){
         double distanceFromLeft= 6.5;
         double leftDistance = rangeSensorLeft.getDistance(DistanceUnit.CM)+distanceFromLeft;
+
+        while(leftDistance>1000){
+            leftDistance = rangeSensorLeft.getDistance(DistanceUnit.CM)+distanceFromLeft;
+        }
+
         telemetry.addData("left",leftDistance);
         return leftDistance;
     }
@@ -553,6 +562,11 @@ public void holonomicDrive(){
     public double getRightDistanceCM(){
         double distanceFromRight = 21.50;
         double rightDistance = rangeSensorRight.getDistance(DistanceUnit.CM)+distanceFromRight;
+
+        while(rightDistance>1000){
+            rightDistance = rangeSensorRight.getDistance(DistanceUnit.CM)+distanceFromRight;
+        }
+
         telemetry.addData("right",rightDistance);
         return rightDistance;
     }

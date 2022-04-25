@@ -54,11 +54,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
  **/
 
 @Autonomous(name="DuckRotisserieBlueRangeSensor", group="Linear Opmode")
-@Disabled
+//@Disabled
 public class duckRotisserieAutoBlueRangeSensor extends ParentOpMode{
-
-//'
-
     @Override
     public void runOpMode() {
 
@@ -82,12 +79,12 @@ public class duckRotisserieAutoBlueRangeSensor extends ParentOpMode{
                 telemetry.update();
                 sleep(100);
             }
-            driveDistanceMove(10,180);                  //goes into tha wall
-            while (getFrontDistanceCM()< 6.9) {                                 //back up the wall
-                holonomicDriveAuto(.420, 0, 0);
-                telemetry.update();
-                sleep(100);
-            }
+         //   driveDistanceMove(10,180);                  //goes into tha wall
+//            while (getFrontDistanceCM()< 6.9) {                                 //back up the wall
+//                holonomicDriveAuto(.420, 0, 0);
+//                telemetry.update();
+//                sleep(100);
+//            }
 
             stopDrive();
             HeadingHolder.SetOffsetOfTheHeading(getGyroAngle());

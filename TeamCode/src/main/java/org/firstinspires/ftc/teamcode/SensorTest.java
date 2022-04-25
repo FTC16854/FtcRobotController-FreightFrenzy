@@ -81,7 +81,7 @@ public class SensorTest extends ParentOpMode{
             getLeftDistanceCM();
 
             telemetry.update();
-            sleep(200);
+            sleep(100);
         }
     }
 
