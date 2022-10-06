@@ -30,6 +30,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
  * Original FTC opmode header block
@@ -46,15 +47,20 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  **/
 
-/** Parent OpMode Class
- * All Teleop and Autonomous OpModes should inherit from (extend) ParentOpMode.
- * Each child/subclass OpMode should have its own unique runOpMode() method that will
- * override the ParentOpMode runOpMode() method.
- **/
 
-@TeleOp(name="FieldCentric", group="Linear Opmode")
+
+
+
+
+@TeleOp(name="OMNI FieldCentric", group="Linear Opmode")
 //@Disabled
-public class ChildOpModeFieldCentric extends ParentOpMode{
+public class ChildOpModeFieldCentricOmni extends ParentOpMode{
+
+    private DcMotor rightFront = null;
+    private DcMotor rightBack = null;
+    private DcMotor leftFront = null;
+    private DcMotor leftBack = null;
+
 
     @Override
     public void runOpMode() {
@@ -74,7 +80,7 @@ public class ChildOpModeFieldCentric extends ParentOpMode{
             lifttheMONKE();           //set position to top or bottom
             duckWheelSpin();
             intakeEatr();
-            fieldCentric();
+            fieldCentricOmni();
             //include emergency stop check in all runOpMode() functions/methods
             if(emergencyStopped()){
                 break;
@@ -88,7 +94,46 @@ public class ChildOpModeFieldCentric extends ParentOpMode{
         }
     }
 
+    public void fieldCentricOmni(){
+        double wheelVelocityFrontRight;
+        double wheelVelocityBackRight;
+        double wheelVelosityFrontLeft;
+        double wheelVelosityBackLeft;
+
+        double angleOffset = getGyroAngle() - 90 + HeadingHolder.getOffsetOfTheHeading();
+
+        double robotSpeed = Math.hypot(left_sticky_y(), left_sticky_x());
+
+        double robotAngle = Math.atan2(left_sticky_y(),left_sticky_x())-Math.toRadians(angleOffset);
+
+        double speedOfRotation = -right_sticky_x()*.75;
+
+        if (restartGyroButton()){
+            gyroInitialize();   //Re-initialize gyro. Tried using resetAngle(), but that didn't work.
+        }
+
+        wheelVelocityFrontRight = robotSpeed*Math.sin(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityFrontLeft = robotSpeed*Math.cos(robotAngle+(Math.PI/4))+speedOfRotation;
+        wheelVelocityBackRight = robotSpeed*Math.cos(robotAngle+(Math.PI/4))-speedOfRotation;
+        wheelVelosityBackLeft = robotSpeed*Math.sin(robotAngle+(Math.PI/4))+speedOfRotation;
+
+        rightFront.setPower(wheelVelocityFrontRight);
+        leftFront.setPower(wheelVelosityFrontLeft);
+        rightBack.setPower(wheelVelocityBackRight);
+        leftBack.setPower(wheelVelosityBackLeft);
+
+        telemetry.addData("LF speed ",wheelVelosityFrontLeft);
+        telemetry.addData("RF speed ", wheelVelocityFrontRight);
+        telemetry.addData("LB speed ",wheelVelosityBackLeft);
+        telemetry.addData("RB speed ",wheelVelocityBackRight);
+
+        telemetry.addData("angle", angleOffset);
+    }
+
+
+
 }
+
 
         //TODO
         //  Hardware map
